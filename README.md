@@ -7,10 +7,10 @@ A Proxmox cluster consists of two or more hosts, each running the Proxmox Virtua
 To enable High Availability (HA) of the VE's, you can build a Cluster of VE's, so that one VE can take over the VM's and LXC's from another VE in case of issues. These issues impacting the host may include software or hardware upgrades, hardware or software failures, etc. that prevents a host from working normally.
 Proxmox has the feature to build the cluster with a (dedicated) network to carry the traffic caused by the transfer of a VM from one host to another. This transfer should happen quickly, while significant amount of data must be moved. Therefor a fast, reliable and preferably dedicated synchoronization network is prefererred.
 Here we propose a cluster with a dedicated synchronization network based on USB4/Thunderbolt. USB4/Thunderbolt namely supports IP (by the thunderbolt-net Linux module), so Point-to-Point IP connections can be made.
-The prior work by scyto demonstrates that this works on Intel based mini personal computers (Intel NUC13). Knowing that Thunderbolt support on Intel platforms is very good, the project described here takes on the challenge to test this on AMD based mini personal computers (Bee-link GTR7).
+The prior work by scyto demonstrates that this works on Intel based mini personal computers (Intel NUC13). Knowing that Thunderbolt support on Intel platforms is very good, the project described here takes on the challenge to test this on AMD based mini personal computers ([Bee-link GTR7](https://www.bee-link.com/catalog/product/index?id=485)).
 # Architecture
 The Proxmox cluster consists of identical 3 mini pc's, each with the following configuration:
-- Bee-link GTR 7 (or GTR 7 Pro) mini pc with AMD Ryzen 7 7840HS (or AMD Ryzen 9 7940HS) processor, 32 GB DDR5 5600 RAM, 2x 2.5 Gbps Ethernet
+- [Bee-link GTR 7](https://www.bee-link.com/catalog/product/index?id=485) (or GTR 7 Pro) mini pc with AMD Ryzen 7 7840HS (or AMD Ryzen 9 7940HS) processor, 32 GB DDR5 5600 RAM, 2x 2.5 Gbps Ethernet
 - 2x Samsung 990 Pro SSD's, each 2 TB
 - Thunderbolt4 cable, length: 50 cm
 
