@@ -5,7 +5,7 @@ This work is mainly based on prior work of [scyto](https://gist.github.com/scyto
 # Problem Statement
 A Proxmox cluster consists of two or more hosts, each running the Proxmox Virtual Environment (VE). Virtual Machines (VM's) and Linux Containers (LXC's) are hosted by the VE.
 To enable High Availability (HA) of the VE's, you can build a Cluster of VE's, so that one VE can take over the VM's and LXC's from another VE in case of issues. These issues impacting the host may include software or hardware upgrades, hardware or software failures, etc. that prevents a host from working normally.
-Proxmox has the feature to build the cluster with a (dedicated) network to carry the traffic caused by the transfer of a VM from one host to another. This should happen quickly, while signifiacnt amount of data must be moved. Therefor, a fast, reliable and preferably dedicated synchoronization network is prefererred.
+Proxmox has the feature to build the cluster with a (dedicated) network to carry the traffic caused by the transfer of a VM from one host to another. This transfer should happen quickly, while significant amount of data must be moved. Therefor a fast, reliable and preferably dedicated synchoronization network is prefererred.
 Here we propose a cluster with a dedicated synchronization network based on USB4/Thunderbolt. USB4/Thunderbolt namely supports IP, so Point-to-Point IP connections can be made.
 The prior work by scyto demonstrates that this works on Intel based mini personal computers (Intel NUC13). Knowing that Thunderbolt support on Intel platforms is very good, the project described here takes on the challenge to test this on AMD based mini personal computers (Bee-link GTR7).
 # Architecture
