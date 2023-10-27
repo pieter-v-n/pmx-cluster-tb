@@ -26,6 +26,11 @@ So, these servers are configured as:
 1. hostname: pve1, ip address: 192.168.178.11
 2. hostname: pve2, ip address: 192.168.178.12
 3. hostname: pve3, ip address: 192.168.178.13
+# Add secundary user (optional)
+Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
+- as root, run: adduser <username>
+-   provide password and other facts (optional)
+- as root, run: usermod -aG sudo <username>
 # Add Graphical User Interface to each server (optional)
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 
