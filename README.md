@@ -11,7 +11,7 @@ The prior work by scyto demonstrates that this works on Intel based mini persona
 # Architecture
 The Proxmox cluster consists of identical 3 mini pc's, each with the following configuration:
 - [Bee-link GTR 7](https://www.bee-link.com/catalog/product/index?id=485) (or [GTR 7 Pro](https://www.bee-link.com/catalog/product/index?id=545)) mini pc with AMD Ryzen 7 7840HS (or AMD Ryzen 9 7940HS) processor, 32 GB DDR5 5600 RAM, 2x 2.5 Gbps Ethernet
-- 2x Samsung 990 Pro SSD's, each 2 TB
+- 2x [Samsung 990 Pro SSD](https://www.samsung.com/nl/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/)'s, each 2 TB
 - Thunderbolt4 cable, length: 50 cm
 
 Each of these operate as an Proxmox VE. Each server has 2x USB4 ports. These ports are used to connect to the other 2 servers, so creating a 3-node ring configuration. It does not matter in which order/which of the 2 USB4 ports connect to a particular port on that other server.
