@@ -10,7 +10,7 @@ Here we propose a cluster with a dedicated synchronization network based on USB4
 The prior work by scyto demonstrates that this works on Intel based mini personal computers (Intel NUC13). Knowing that Thunderbolt support on Intel platforms is very good, the project described here takes on the challenge to test this on AMD based mini personal computers ([Bee-link GTR7](https://www.bee-link.com/catalog/product/index?id=485)).
 # Architecture
 The Proxmox cluster consists of identical 3 mini pc's, each with the following configuration:
-- [Bee-link GTR 7](https://www.bee-link.com/catalog/product/index?id=485) (or GTR 7 Pro) mini pc with AMD Ryzen 7 7840HS (or AMD Ryzen 9 7940HS) processor, 32 GB DDR5 5600 RAM, 2x 2.5 Gbps Ethernet
+- [Bee-link GTR 7](https://www.bee-link.com/catalog/product/index?id=485) (or [GTR 7 Pro](https://www.bee-link.com/catalog/product/index?id=545)) mini pc with AMD Ryzen 7 7840HS (or AMD Ryzen 9 7940HS) processor, 32 GB DDR5 5600 RAM, 2x 2.5 Gbps Ethernet
 - 2x Samsung 990 Pro SSD's, each 2 TB
 - Thunderbolt4 cable, length: 50 cm
 
