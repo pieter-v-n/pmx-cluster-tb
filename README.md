@@ -207,6 +207,55 @@ By default, IPv4 and IPv6 forwarding is disable. To enable, we need to edit the 
 - search for `ip_forward` and then remove the `#` in front of: `#net.ipv4.ip_forward=1`
 - save the file and exit the editor.
 
+## Configure FRR
+Now it is time to configure the FRR Router. We already have installed the `frr` package in an earlier step.
+1. as root (or by sudo), open the file `/etc/frr/daemons` for editing
+2. search for `fabricd` and then change the value `non` into `yes`
+3. save the file and exit the editor
+4. as root (or by sudo) restart frr `systemctl restart frr`
+
+Next, we will configure the router.
+1. as root (or by sudo), open the router shell: `vtysh`
+2. show the current cobnfiguration by: `show running-config`
+3. enter the configuration mode by: `configure`
+4. type the following, where X is replaced by 1, 2, 3 for host pve1, pve2 and pve3:
+```
+frr version 8.5.2
+frr defaults traditional
+hostname pve1
+log syslog informational
+service integrated-vtysh-config
+!
+interface en05
+ ip router openfabric 1
+ ipv6 router openfabric 1
+exit
+!
+interface en06
+ ip router openfabric 1
+ ipv6 router openfabric 1
+exit
+!
+interface lo
+ ip router openfabric 1
+ ipv6 router openfabric 1
+ openfabric passive
+exit
+!
+router openfabric 1
+ net 49.0000.0000.000X.00
+exit
+!
+end
+```
+5. save the configuration: `write memory`
+6. check the configuration again: `show running-config` and fix any errors.
+7. exit and repeat for the other hosts.
+
 ## Reboot the host
 After all these changes to the host configuration files, it is time to reboot the system.
 - as root (or by sudo), run: `reboot now`
+## Check connectivity
+After all hosts are booted, and interceonnected by the 3 Thunderbolt cables, we can check whether each host can see eachother.
+1. as root (or by sudo) type: `vtysh -c "show openfabric topology"`
+2. we should see that one host can see 2 other hosts, both with IPv4 (using IPv4 addresses: `10.0.81/32`, `10.0.82/32`, and `10.0.83/32`) ,and IPv6 (using IPv6 addresses: `fc00::81/128`, `fc00::82/128` and `fc00::83/128`) .
