@@ -32,6 +32,7 @@ After the basic Proxmox installation, we need to adapt the repositories. Using t
 2. Disable component `pve-enterprise`
 3. Add `pve-no-subscription`
 4. Add `no-subscription` (ceph)
+
 The result will look like: ![Repository overview](images/Repositories.png)
 # Add secundary user (optional) (repeat for all 3 hosts)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
