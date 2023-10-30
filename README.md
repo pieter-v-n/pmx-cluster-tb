@@ -181,7 +181,7 @@ For the outer-most USB4 port, create the file `/usr/local/bin/pve-en06.sh` with 
 ```
 Make the file executable by running as root (or by sudo): `chmod +x /usr/local/bin/pve-en06.sh`
 
-## Create rules file to trigger the start-up scripts
+## Create rules file to trigger the startup scripts
 Create the file `/etc/udev/rules.d/10-tb-en.rules` with the following contents:
 ```
 #!/bin/bash
