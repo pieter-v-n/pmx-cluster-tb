@@ -72,7 +72,7 @@ The file `/etc/network/interfaces` must be changed by:
 1. Delete the thunderboltX entries
 2. Add the en05 and en06 entries for both IPv4 and IPv6 (take note of the increased MTU size)
 
-So that the file will look like: (X = 1, 2, 3 for pve1, pve2 and pve3)
+So that the file will look like: (replace X with 1, 2, 3 for pve1, pve2 and pve3)
 ```
 auto lo
 iface lo inet loopback
