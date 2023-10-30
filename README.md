@@ -39,12 +39,17 @@ The result will look like: ![Repository overview](images/Repositories.png)
 Now check for updates and upgrade the hosts to the latest software versions.
 Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
 Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-14-pve` or later.
+
+## Add FRR Router and Iperf3 Test packages
+Later, we want to interconnect the 3 hosts. In order for one host to find the other, the `frr` Router package is needed. Also, once the cluster is up and running, we want to be able to test the performance of each link. For that purpose, we need `iperf3`.
+- as root, run: `apt install frr iperf3`
+
 ## Add secundary user (optional)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
 - as root, run: `adduser <username>`
 -   provide password and other facts (optional)
 - as root, run: `usermod -aG sudo <username>`
-## Add Graphical User Interface to each server (optiona)
+## Add Graphical User Interface to each server (optional)
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
