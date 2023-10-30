@@ -117,7 +117,7 @@ iface en06 inet6 static
         mtu 4000
 ```
 ## Detect Thunderbolt Interface device identifiers
-We need to uniquely identify each Thunderbolt network device, in order to manage it.
+We need to uniquely identify each Thunderbolt network device, in order to manage it. See [GTR7 Backside](/images/Server-back.png)
 To find out what the ID's are, we use the device monitoring tool.
 1. as root (or use sudo) run: `udevadm monitor` and keep it running
 2. plug in one end of the Thunderbolt cable in the USB4 port closest to the HDMI socket, the other end of the Thunderbolt cable to an USB4 port on another host, and check the output of the monitor. It should report something like:
