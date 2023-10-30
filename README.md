@@ -1,9 +1,9 @@
 # pmx-cluster-tb
 Proxmox cluster using 3 servers interconnected by USB4/Thunderbolt network.
 # Table of Contents
-(pmx-cluster-tb#problem-statement)
-(pmx-cluster-tb#architecture)
-(pmx-cluster-tb#bare-metal-proxmox-installation-repeat-for-all-3-hosts)
+(#problem-statement)
+(#architecture)
+(#bare-metal-proxmox-installation-repeat-for-all-3-hosts)
 
 This work is mainly based on prior work of [scyto](https://gist.github.com/scyto/) as described in his [Proxmox Proof of Concept](https://gist.github.com/scyto/76e94832927a89d977ea989da157e9dc).
 # Problem Statement
