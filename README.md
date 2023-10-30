@@ -190,13 +190,6 @@ Make the file executable by running as root (or by sudo): `chmod +x /usr/local/b
 ## Create rules file to trigger the startup scripts
 Create the file `/etc/udev/rules.d/10-tb-en.rules` with the following contents:
 ```
-#!/bin/bash
-
-# this brings the renamed interface up and reprocesses any settings in /etc/network/interfaces 
-# for the renamed interface
-/usr/sbin/ifup en05
-
-root@pve1:~# cat /etc/udev/rules.d/10-tb-en.rules
 ACTION=="move", SUBSYSTEM=="net", KERNEL=="en05", RUN+="/usr/local/bin/pve-en05.sh"
 ACTION=="move", SUBSYSTEM=="net", KERNEL=="en06", RUN+="/usr/local/bin/pve-en06.sh"
 ```
