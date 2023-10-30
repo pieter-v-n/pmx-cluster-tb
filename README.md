@@ -18,7 +18,8 @@ The Proxmox cluster consists of 3 identical mini pc's, each with the following c
 Each of these operate as an Proxmox VE. Each server has 2x USB4 ports. These ports are used to connect to the other 2 servers, so creating a 3-node ring configuration. It does not matter in which order/which of the 2 USB4 ports connect to a particular port on that other server.
 
 This project describes the changes that need to be made to the individual server configurations to enable an IP synchronization network.
-# Basic Proxmox Installation (repeat for all 3 hosts)
+# Bare Metal Proxmox Installation (repeat for all 3 hosts)
+## Basic Proxmox Installation
 Download the ISO for the Proxmox VE version 8 installation image onto a USB flash medium, such as the [Ventoy](https://www.ventoy.net/en/index.html) tool.
 In the future, we want to use most of the storage space on the 2 TB Samsung SSD for cluster storage (Ceph). So when installing Proxmox on the server, select the (first) Samsung SSD but reduce the used space for Proxmox to 200 GB.
 Then follow the PVE installation using default values. In my setup, I have connected one of the 2.5 Gbps ports to my home router (for internet access). The router normally manages the IP addressing by DHCP, but I have configured the router to keep the addresses between 192.168.178.1 and 192.168.178.20 outside the range used by DHCP, so I can assign a unique IP address from this range to each of the servers.
@@ -26,7 +27,7 @@ So, these servers are configured as:
 1. hostname: `pve1`, ip address: `192.168.178.11`
 2. hostname: `pve2`, ip address: `192.168.178.12`
 3. hostname: `pve3`, ip address: `192.168.178.13`
-# Additional steps for Proxmox installation (repeat for all 3 hosts)
+## Additional steps for Proxmox installation
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
 2. Disable component `pve-enterprise`
@@ -38,16 +39,16 @@ The result will look like: ![Repository overview](images/Repositories.png)
 Now check for updates and upgrade the hosts to the latest software versions.
 Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
 Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-14-pve` or later.
-# Add secundary user (optional, repeat for all 3 hosts)
+## Add secundary user (optional)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
 - as root, run: `adduser <username>`
 -   provide password and other facts (optional)
 - as root, run: `usermod -aG sudo <username>`
-# Add Graphical User Interface to each server (optional, repeat for all 3 hosts)
+## Add Graphical User Interface to each server (optiona)
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
-# Enable Thunderbolt 
+# Enable Thunderbolt (repeat for all 3 hosts)
 ## Install `lldpd`
 To enable LLDP (IEEE 802.1ab) Link Layer Discovery Protocol, install the lldpd package.
 - as root (or use sudo): `apt install lldpd`
