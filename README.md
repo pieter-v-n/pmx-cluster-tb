@@ -205,6 +205,8 @@ By default, IPv4 and IPv6 forwarding is disable. To enable, we need to edit the 
 - as root (or by sudo), open the file /etc/sysctl.conf` for editing
 - search for `forwarding` and then remove the `#` in front of: `#net.ipv6.conf.all.forwarding=1`
 - search for `ip_forward` and then remove the `#` in front of: `#net.ipv4.ip_forward=1`
+- save the file and exit the editor.
+
 ## Reboot the host
 After all these changes to the host configuration files, it is time to reboot the system.
 - as root (or by sudo), run: `reboot now`
