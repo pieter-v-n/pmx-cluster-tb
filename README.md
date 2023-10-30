@@ -72,24 +72,24 @@ The file `/etc/network/interfaces` must be changed by:
 1. Delete the thunderboltX entries
 2. Add the en05 and en06 entries for both IPv4 and IPv6 (take note of the increased MTU size)
 
-So that the file will look like:
+So that the file will look like: (X = 1, 2, 3 for pve1, pve2 and pve3)
 ```
 auto lo
 iface lo inet loopback
 
 auto lo:0
 iface lo:0 inet static
-        address 10.0.0.81/32
+        address 10.0.0.8X/32
         
 auto lo:6
 iface lo:6 inet static
-        address fc00::81/128
+        address fc00::8X/128
 
 iface enp3s0 inet manual
 
 auto vmbr0
 iface vmbr0 inet static
-	address 192.168.178.11/24
+	address 192.168.178.1X/24
 	gateway 192.168.178.1
 	bridge-ports enp3s0
 	bridge-stp off
