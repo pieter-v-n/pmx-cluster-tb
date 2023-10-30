@@ -111,3 +111,86 @@ iface en06 inet static
 iface en06 inet6 static
         mtu 4000
 ```
+## Detect Thunderbolt Interface device identifiers
+We need to uniquely identify each Thunderbolt network device, in order to manage it.
+To find out what the ID's are, we use the device monitoring tool.
+1. as root (or use sudo) run: `udevadm monitor` and keep it running
+2. plug in one end of the Thunderbolt cable in the USB4 port closest to the HDMI socket, the other end of the Thunderbolt cable to an USB4 port on another host, and check the output of the monitor. It should report something like:
+
+```
+KERNEL[416631.261658] change   /0-2 (thunderbolt)
+KERNEL[416631.261982] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2 (thunderbolt)
+KERNEL[416631.262026] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2/0-2.0 (thunderbolt)
+KERNEL[416631.262226] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2/0-2.0/net/thunderbolt0 (net)
+KERNEL[416631.262260] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2/0-2.0/net/thunderbolt0/queues/rx-0 (queues)
+KERNEL[416631.262279] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2/0-2.0/net/thunderbolt0/queues/tx-0 (queues)
+KERNEL[416631.262475] bind     /devices/pci0000:00/0000:00:08.3/0000:ca:00.5/domain0/0-0/0-2/0-2.0 (thunderbolt)
+```
+We will use the `0000:ca:00.5` string as identifier for the inner-most USB4 port.
+Repeat this for the other USB4 port:
+1. as root (or use sudo) run: `udevadm monitor` and keep it running
+2. plug in one end of the Thunderbolt cable in the USB4 port closest to the Audio socket, the other end of the Thunderbolt cable to an USB4 port on another host, and check the output of the monitor. It should report something like:
+
+```
+KERNEL[416922.266301] change   /1-2 (thunderbolt)
+KERNEL[416922.266584] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2 (thunderbolt)
+KERNEL[416922.266626] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2/1-2.0 (thunderbolt)
+KERNEL[416922.266906] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2/1-2.0/net/thunderbolt0 (net)
+KERNEL[416922.266929] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2/1-2.0/net/thunderbolt0/queues/rx-0 (queues)
+KERNEL[416922.266943] add      /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2/1-2.0/net/thunderbolt0/queues/tx-0 (queues)
+KERNEL[416922.267044] bind     /devices/pci0000:00/0000:00:08.3/0000:ca:00.6/domain1/1-0/1-2/1-2.0 (thunderbolt)
+```
+We will use the `0000:ca:00.6` string as identifier for the outer-most USB4 port.
+## Create link files for the Thunderbolt interfaces
+For the inner-most USB4 port, create the file `/etc/systemd/network/00-thunderbolt0.link` with the following contents:
+```
+[Match]
+Path=pci-0000:ca:00.5
+Driver=thunderbolt-net
+[Link]
+MACAddressPolicy=none
+Name=en05
+```
+For the outer-most USB4 port, create the file `/etc/systemd/network/00-thunderbolt1.link` with the following contents:
+```
+[Match]
+Path=pci-0000:ca:00.6
+Driver=thunderbolt-net
+[Link]
+MACAddressPolicy=none
+Name=en06
+```
+## Create startup scripts for the Thunderbolt interfaces
+For the inner-most USB4 port, create the file `/usr/local/bin/pve-en05.sh` with the following contents:
+```
+#!/bin/bash
+
+# this brings the renamed interface up and reprocesses any settings in /etc/network/interfaces 
+# for the renamed interface
+/usr/sbin/ifup en05
+```
+Make the file executable by running as root (or by sudo): `chmod +x /usr/local/bin/pve-en05.sh`
+
+For the outer-most USB4 port, create the file `/usr/local/bin/pve-en06.sh` with the following contents:
+```
+#!/bin/bash
+
+# this brings the renamed interface up and reprocesses any settings in /etc/network/interfaces 
+# for the renamed interface
+/usr/sbin/ifup en06
+```
+Make the file executable by running as root (or by sudo): `chmod +x /usr/local/bin/pve-en06.sh`
+
+## Create rules file to trigger the start-up scripts
+Create the file `/etc/udev/rules.d/10-tb-en.rules` with the following contents:
+```
+#!/bin/bash
+
+# this brings the renamed interface up and reprocesses any settings in /etc/network/interfaces 
+# for the renamed interface
+/usr/sbin/ifup en05
+
+root@pve1:~# cat /etc/udev/rules.d/10-tb-en.rules
+ACTION=="move", SUBSYSTEM=="net", KERNEL=="en05", RUN+="/usr/local/bin/pve-en05.sh"
+ACTION=="move", SUBSYSTEM=="net", KERNEL=="en06", RUN+="/usr/local/bin/pve-en06.sh"
+```
