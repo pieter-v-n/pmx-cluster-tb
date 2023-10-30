@@ -34,12 +34,16 @@ After the basic Proxmox installation, we need to adapt the repositories. Using t
 4. Add `no-subscription` (ceph)
 
 The result will look like: ![Repository overview](images/Repositories.png)
-# Add secundary user (optional) (repeat for all 3 hosts)
+
+Now check for updates and upgrade the hosts to the latest software versions.
+Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
+
+# Add secundary user (optional, repeat for all 3 hosts)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
 - as root, run: `adduser <username>`
 -   provide password and other facts (optional)
 - as root, run: `usermod -aG sudo <username>`
-# Add Graphical User Interface to each server (optional) (repeat for all 3 hosts)
+# Add Graphical User Interface to each server (optional, repeat for all 3 hosts)
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
