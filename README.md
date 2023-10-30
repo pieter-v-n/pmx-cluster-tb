@@ -47,5 +47,66 @@ Normally, Proxmox VE only creates the user "root" with super user permissions. H
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
+# Enable Thunderbolt 
+## Install `lldpd`
+To enable LLDP (IEEE 802.1ab) Link Layer Discovery Protocol, install the lldpd package.
+- as root (or use sudo): `apt install lldpd`
+## Install Thunderbolt Modules
+To enable Thunderbolt and Thunderbolt Networking, add the `thunderbolt` and `thunderbolt-net` modules to the `/etc/modules` file.
+The contents of this file should look like:
+```
+# /etc/modules: kernel modules to load at boot time.
+#
+# This file contains the names of kernel modules that should be loaded
+# at boot time, one per line. Lines beginning with "#" are ignored.
+# Parameters can be specified after the module name.
 
+# add TB for networking as per: https://gist.github.com/scyto/67fdc9a517faefa68f730f82d7fa3570?permalink_comment_id=4700311
+thunderbolt
+thunderbolt-net
+```
+## Edit Interfaces file
+When the Thunderbolt interface show up, they will be named `thunderbolt0` and `thunderbolt1` per default. We want to rename these interfaces, so they follow the standard ethernet interface naming rules, so they will show up in the Proxmox network interfaces list.
+The file `/etc/network/interfaces` must be changed by:
+1. Delete the thunderboltX entries
+2. Add the en05 and en06 entries for both IPv4 and IPv6 (take note of the increased MTU size)
 
+So that the file will look like:
+```
+auto lo
+iface lo inet loopback
+
+auto lo:0
+iface lo:0 inet static
+        address 10.0.0.81/32
+        
+auto lo:6
+iface lo:6 inet static
+        address fc00::81/128
+
+iface enp3s0 inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+	address 192.168.178.11/24
+	gateway 192.168.178.1
+	bridge-ports enp3s0
+	bridge-stp off
+	bridge-fd 0
+
+iface enp4s0 inet manual
+
+auto en05
+iface en05 inet static
+        mtu 4000
+
+iface en05 inet6 static
+        mtu 4000
+
+auto en06
+iface en06 inet static
+        mtu 4000
+
+iface en06 inet6 static
+        mtu 4000
+```
