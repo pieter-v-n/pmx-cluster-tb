@@ -24,9 +24,9 @@ Download the ISO for the Proxmox VE version 8 installation image onto a USB flas
 In the future, we want to use most of the storage space on the 2 TB Samsung SSD for cluster storage (Ceph). So when installing Proxmox on the server, select the (first) Samsung SSD but reduce the used space for Proxmox to 200 GB.
 Then follow the PVE installation using default values. In my setup, I have connected one of the 2.5 Gbps ports to my home router (for internet access). The router normally manages the IP addressing by DHCP, but I have configured the router to keep the addresses between 192.168.178.1 and 192.168.178.20 outside the range used by DHCP, so I can assign a unique IP address from this range to each of the servers.
 So, these servers are configured as:
-1. hostname: `pve1`, ip address: `192.168.178.11`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
-2. hostname: `pve2`, ip address: `192.168.178.12`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
-3. hostname: `pve3`, ip address: `192.168.178.13`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
+1. hostname: `pve1`, ip address: `192.168.178.11/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
+2. hostname: `pve2`, ip address: `192.168.178.12/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
+3. hostname: `pve3`, ip address: `192.168.178.13/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 ## Additional steps for Proxmox installation
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
