@@ -258,4 +258,4 @@ After all these changes to the host configuration files, it is time to reboot th
 ## Check connectivity
 After all hosts are booted, and interceonnected by the 3 Thunderbolt cables, we can check whether each host can see eachother.
 1. as root (or by sudo) type: `vtysh -c "show openfabric topology"`
-2. we should see that one host can see 2 other hosts, both with IPv4 (using IPv4 addresses: `10.0.81/32`, `10.0.82/32`, and `10.0.83/32`) ,and IPv6 (using IPv6 addresses: `fc00::81/128`, `fc00::82/128` and `fc00::83/128`) .
+2. we should see that each host can see the two other hosts, both with IPv4 (using IPv4 addresses: `10.0.81/32`, `10.0.82/32`, and `10.0.83/32`), and IPv6 (using IPv6 addresses: `fc00::81/128`, `fc00::82/128` and `fc00::83/128`) .
