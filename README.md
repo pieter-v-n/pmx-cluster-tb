@@ -37,7 +37,7 @@ The result will look like: ![Repository overview](images/Repositories.png)
 
 Now check for updates and upgrade the hosts to the latest software versions.
 Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
-
+Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-15-pve` or later.
 # Add secundary user (optional, repeat for all 3 hosts)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
 - as root, run: `adduser <username>`
