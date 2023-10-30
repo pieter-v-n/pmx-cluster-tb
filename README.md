@@ -194,3 +194,6 @@ root@pve1:~# cat /etc/udev/rules.d/10-tb-en.rules
 ACTION=="move", SUBSYSTEM=="net", KERNEL=="en05", RUN+="/usr/local/bin/pve-en05.sh"
 ACTION=="move", SUBSYSTEM=="net", KERNEL=="en06", RUN+="/usr/local/bin/pve-en06.sh"
 ```
+## Reboot the host
+After all these changes to the host configuration files, it is time to reboot the system.
+- as root (or by sudo), run: `reboot now`
