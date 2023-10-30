@@ -15,7 +15,7 @@ The Proxmox cluster consists of 3 identical mini pc's, each with the following c
 - [Samsung 990 Pro SSD](https://www.samsung.com/nl/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/) 2 TB drive for backup (200 GB) and data (1800 GB)
 - [Thunderbolt4 cable](https://www.aliexpress.com/item/1005004619027797.html?spm=a2g0o.order_list.order_list_main.5.49c118022JCe4g), length: 50 cm
 
-Each of these operate as an Proxmox VE. Each server has 2x USB4 ports. These ports are used to connect to the other 2 servers, so creating a 3-node ring configuration. The IP addresses for the new Point-to-Point network are not associated to individual interfaces, but are associated to `local host`. Thus way, it does not matter in which order/which of the 2 USB4 ports connect to a particular port on that other server. The Router (frr based) with the switch fabric engine will be able to route between the hosts using the Point-to-Point netwrok.
+Each of these operate as an Proxmox VE. Each server has 2x USB4 ports. These ports are used to connect to the other 2 servers, so creating a 3-node ring configuration. The IP addresses for the new Point-to-Point network are not associated to individual interfaces, but are associated to `local host`. This way, it does not matter in which order/which of the two USB4 ports connect to a particular port on the other server. The Router (frr based) with the switch fabric engine will be able to route between the hosts using the Point-to-Point netwrok.
 
 This project describes the changes that need to be made to the individual server configurations to enable an IP synchronization network.
 # Bare Metal Proxmox Installation (repeat for all 3 hosts)
