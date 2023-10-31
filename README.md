@@ -261,7 +261,7 @@ Now all 3 hosts are up and running and the inter-connectivity between each host 
 - We will start the cluster creation with pve1 and then
 - join pve2 to the cluster.
 - Finally we will join pve3 to the cluster.
-- 
+
 So follow these steps in sequence:
 1. Use the Proxmox GUI to login as root to `pve1`.
 2. Go to Datacenter -> Cluster -> Create Cluster. Cluster Name: `pvc1`, Cluster Network Link 0: `10.0.0.81`. Click Create and wait until the cluster creation task has completed.
