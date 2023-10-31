@@ -203,7 +203,7 @@ By default, IPv4 and IPv6 forwarding is disable. To enable, we need to edit the 
 ## Configure FRR
 Now it is time to configure the FRR Router. We already have installed the `frr` package in an earlier step.
 1. as root (or by sudo), open the file `/etc/frr/daemons` for editing
-2. search for `fabricd` and then change the value `non` into `yes`
+2. search for `fabricd` and then change the value `no` into `yes`
 3. save the file and exit the editor
 4. as root (or by sudo) restart frr `systemctl restart frr`
 
