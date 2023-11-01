@@ -71,7 +71,9 @@ After the basic Proxmox installation, we need to adapt the repositories. Using t
 The result will look like: ![Repository overview](images/Repositories.png)
 
 Now check for updates and upgrade the hosts to the latest software versions.
+
 Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
+
 Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-14-pve` or later.
 
 ## Add FRR Router and Iperf3 Test packages
