@@ -263,7 +263,7 @@ Next, we will configure the router.
 ```
 frr version 8.5.2
 frr defaults traditional
-hostname pve1
+hostname pveX
 log syslog informational
 service integrated-vtysh-config
 !
