@@ -1,0 +1,6 @@
+[Match]
+Path=pci-0000:ca:00.6
+Driver=thunderbolt-net
+[Link]
+MACAddressPolicy=none
+Name=en06
