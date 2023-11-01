@@ -1,0 +1,9 @@
+# /etc/modules: kernel modules to load at boot time.
+#
+# This file contains the names of kernel modules that should be loaded
+# at boot time, one per line. Lines beginning with "#" are ignored.
+# Parameters can be specified after the module name.
+
+# add TB for networking as per: https://gist.github.com/scyto/67fdc9a517faefa68f730f82d7fa3570?permalink_comment_id=4700311
+thunderbolt
+thunderbolt-net
