@@ -46,7 +46,8 @@ Install Proxmox VE version 8 following these steps:
 15. The GRUB boot menu is presented. Select "Proxmox VE GNU/Linux" to boot
 
 ## Additional steps after Proxmox installation
-Note: The Proxmox GUI can be accessed via the management interface using a browser. The URL is for:
+### Login
+The Proxmox GUI can be accessed via the management interface using a browser. The URL is for:
 1. `pve1`: [192.168.178.11:8006](http://192.168.178.11:8006)
 2. `pve1`: [192.168.178.12:8006](http://192.168.178.12:8006)
 3. `pve1`: [192.168.178.13:8006](http://192.168.178.13:8006)
@@ -61,7 +62,7 @@ Enter:
 - Language: `English - English`
 
 You will be prompted with a message about not having a valid subscription. Just click OK. Later we will disable this annoying message.
-
+### Adapt Repositories
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Select and `Disable` component `enterprise`
 2. Select and `Disable` component `pve-enterprise`
@@ -69,7 +70,7 @@ After the basic Proxmox installation, we need to adapt the repositories. Using t
 4. Add `no-subscription` (ceph) by clicking `Add` and selecting `Ceph Quincy No-Subscription`
 
 The result will look like: ![Repository overview](images/Repositories.png)
-
+### Check for updates and Upgrade
 Now check for updates and upgrade the hosts to the latest software versions.
 
 Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then: `Refresh`, then `Upgrade`.
@@ -83,7 +84,8 @@ Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
 
 Press `^\` to find: `Ext.Msg.show` to replace by: `void({ //` and `Y`. Do this only for the first match. So now enter `^C` to cancel remaining replace operations.
 Leave the editor by `^X` and `Y` to save the file and `Enter`.
-
+### Reboot
+Now it is the right time to reboot the host, so we can enjoy the latest kernel. On Datacenter -> pveX, click the `Reboot` button.
 ## Add FRR Router and Iperf3 Test packages
 Later, we want to interconnect the 3 hosts. In order for one host to find the other, the `frr` Router package is needed. Also, once the cluster is up and running, we want to be able to test the performance of each link. For that purpose, we need `iperf3`.
 - as root, run: `apt install frr iperf3`
