@@ -50,7 +50,9 @@ Note: The Proxmox GUI can be accessed via the management interface using a brows
 1. `pve1`: [192.168.178.11:8006](http://192.168.178.11:8006)
 2. `pve1`: [192.168.178.12:8006](http://192.168.178.12:8006)
 3. `pve1`: [192.168.178.13:8006](http://192.168.178.13:8006)
-You will be presented with a login widget: ![GUI Login](images/GUI-login.png).
+
+You will be presented with a login widget:
+![GUI Login](images/GUI-login.png).
 
 Enter:
 - User name: `root`
