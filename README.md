@@ -40,7 +40,7 @@ Install Proxmox VE version 8 following these steps:
 9. Select: **Filesystem: ext4** and **hdsize: 200**. Leave swapsize, maxroot, minfree and maxvz empty.
 10. Select Country, Time zone and Keyboard Layout
 11. Enter the new root password and confirm. Enter your email address.
-12. Select the management interface (e.g. eno1), enter the hostname (e.g. pve1.fritz.box), the fixed IP address (e.g. 192.168.178.11), the Gateway IP address and the DNS server IP address
+12. Select the management interface (e.g. enp3s0), enter the hostname (e.g. pve1.fritz.box), the fixed IP address (e.g. 192.168.178.11), the Gateway IP address and the DNS server IP address
 13. Review the entered values once again and click Install
 14. Now the software will be installed on the system disk. After completion, the host will reboot. Remove the USB drive.
 15. The GRUB boot menu is presented. Select "Proxmox VE GNU/Linux" to boot
