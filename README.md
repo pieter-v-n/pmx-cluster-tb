@@ -27,7 +27,27 @@ So, these servers are configured as:
 1. hostname: `pve1`, ip address: `192.168.178.11/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 2. hostname: `pve2`, ip address: `192.168.178.12/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 3. hostname: `pve3`, ip address: `192.168.178.13/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
+
+The installation of Proxmox VE version 8 is doen following these steps:
+1. Insert the Ventoy USB drive into one of the USB3.2 ports on the host
+2. Boot the host and press F7 until the boot menu appears
+3. Select your Ventoy USB drive as boot device
+4. Select the Proxmox VE 8 Installer: "proxmox-ve_8.0-2.iso"
+5. Select "Boot in normal mode"
+6. Select "Install Proxmox VE (Graphical)"
+7. Accept the EULA
+8. Select the Target Harddisk: "/dev/nvme0n1 (Samsung SSD 990 PRO 2TB)" and click Options
+9. Select: **Filesystem: ext4** and **hdsize: 200**. Leave swapsize, maxroot, minfree and maxvz empty.
+10. Select Country, Time zone and Keyboard Layout
+11. Enter the new root password and confirm. Enter your email address.
+12. Select the management interface (e.g. eno1), enter the hostname (e.g. pve1.fritz.box), the fixed IP address (e.g. 192.168.178.11), the Gateway IP address and the DNS server IP address
+13. Review the entered values once again and click Install
+14. Now the software will be installed on the system disk. After completion, the host will reboot. Remove the USB drive.
+15. The GRUB boot menu is presented. Select "Proxmox VE GNU/Linux" to boot
+
 ## Additional steps after Proxmox installation
+Note: The Proxmox GUI can be accessed via the management interface using a browser. The URL is 192.168.178.11:8006 for pve1.
+
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
 2. Disable component `pve-enterprise`
