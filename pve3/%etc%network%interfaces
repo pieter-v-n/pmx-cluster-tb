@@ -1,0 +1,36 @@
+auto lo
+iface lo inet loopback
+
+auto lo:0
+iface lo:0 inet static
+        address 10.0.0.83/32
+        
+auto lo:6
+iface lo:6 inet static
+        address fc00::83/128
+
+iface enp3s0 inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+	address 192.168.178.13/24
+	gateway 192.168.178.1
+	bridge-ports enp3s0
+	bridge-stp off
+	bridge-fd 0
+
+iface enp4s0 inet manual
+
+auto en05
+iface en05 inet static
+        mtu 4000
+
+iface en05 inet6 static
+        mtu 4000
+
+auto en06
+iface en06 inet static
+        mtu 4000
+
+iface en06 inet6 static
+        mtu 4000
