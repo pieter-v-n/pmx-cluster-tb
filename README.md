@@ -50,6 +50,13 @@ Note: The Proxmox GUI can be accessed via the management interface using a brows
 1. `pve1`: [192.168.178.11:8006](http://192.168.178.11:8006)
 2. `pve1`: [192.168.178.12:8006](http://192.168.178.12:8006)
 3. `pve1`: [192.168.178.13:8006](http://192.168.178.13:8006)
+You will be presented with a login widget: ![GUI Login](images/GUI-login.png).
+
+Enter:
+- User name: `root`
+- Password: the password provided during Proxmox VE installation
+- Realm: `Linux PAM standard authentication`
+- Language: `English - English`
 
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
