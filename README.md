@@ -27,7 +27,7 @@ So, these servers are configured as:
 1. hostname: `pve1`, ip address: `192.168.178.11/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 2. hostname: `pve2`, ip address: `192.168.178.12/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 3. hostname: `pve3`, ip address: `192.168.178.13/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
-## Additional steps for Proxmox installation
+## Additional steps after Proxmox installation
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
 2. Disable component `pve-enterprise`
