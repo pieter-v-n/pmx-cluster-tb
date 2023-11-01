@@ -84,8 +84,7 @@ Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
 
 Press `^\` to find: `Ext.Msg.show` and replace by: `void({ //` and `Y`. Do this only for the first match. So now enter `^C` to cancel remaining replace operations.
 Leave the editor by `^X` and `Y` to save the file and press `Enter` to leave.
-### Reboot
-Now it is the right time to reboot the host, so we can enjoy the latest kernel. On Datacenter -> pveX, click the `Reboot` button.
+
 ## Add FRR Router and Iperf3 Test packages
 Later, we want to interconnect the 3 hosts. In order for one host to find the other, the `frr` Router package is needed. Also, once the cluster is up and running, we want to be able to test the performance of each link. For that purpose, we need `iperf3`.
 - as root, run: `apt install frr iperf3`
@@ -99,6 +98,9 @@ Normally, Proxmox VE only creates the user "root" with super user permissions. H
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
+### Reboot
+Now it is the right time to reboot the host, so we can enjoy the latest kernel. On Datacenter -> pveX, click the `Reboot` button.
+
 # Enable Thunderbolt (repeat for all 3 hosts)
 ## Install `lldpd`
 To enable LLDP (IEEE 802.1ab) Link Layer Discovery Protocol, install the lldpd package.
