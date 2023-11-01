@@ -76,6 +76,12 @@ Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then
 
 Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-14-pve` or later.
 
+To avoid the Subscription message ro pop-up every time you make a change to the host, we need to edit a file.
+On the GUI select the host: Datacenter -> pveX and click the `>_Shell` button on the top of the screen. A new shell opens for the user with root permissions.
+
+Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
+
+
 ## Add FRR Router and Iperf3 Test packages
 Later, we want to interconnect the 3 hosts. In order for one host to find the other, the `frr` Router package is needed. Also, once the cluster is up and running, we want to be able to test the performance of each link. For that purpose, we need `iperf3`.
 - as root, run: `apt install frr iperf3`
