@@ -60,11 +60,13 @@ Enter:
 - Realm: `Linux PAM standard authentication`
 - Language: `English - English`
 
+You will be prompted with a message about not having a valid subscription. Just click OK. Later we will disable this annoying message.
+
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
-1. Disable component `enterprise`
-2. Disable component `pve-enterprise`
-3. Add `pve-no-subscription`
-4. Add `no-subscription` (ceph)
+1. Select and `Disable` component `enterprise`
+2. Select and `Disable` component `pve-enterprise`
+3. Add `pve-no-subscription` by clicking `Add` and selecting `No Subscription`
+4. Add `no-subscription` (ceph) by clicking `Add` and selecting `Ceph Quincy No-Subscription`
 
 The result will look like: ![Repository overview](images/Repositories.png)
 
