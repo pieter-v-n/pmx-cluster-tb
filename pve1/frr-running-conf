@@ -1,0 +1,27 @@
+frr version 8.5.2
+frr defaults traditional
+hostname pve1
+log syslog informational
+service integrated-vtysh-config
+!
+interface en05
+ ip router openfabric 1
+ ipv6 router openfabric 1
+exit
+!
+interface en06
+ ip router openfabric 1
+ ipv6 router openfabric 1
+exit
+!
+interface lo
+ ip router openfabric 1
+ ipv6 router openfabric 1
+ openfabric passive
+exit
+!
+router openfabric 1
+ net 49.0000.0000.000X.00
+exit
+!
+end
