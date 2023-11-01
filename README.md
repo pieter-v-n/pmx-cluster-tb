@@ -81,6 +81,8 @@ On the GUI select the host: Datacenter -> pveX and click the `>_Shell` button on
 
 Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
 
+Press `^\` to find: `Ext.Msg.show` to replace by: `void({ //` and `Y`. Do this only for the first match. So now enter `^C` to cancel remaining replace operations.
+
 
 ## Add FRR Router and Iperf3 Test packages
 Later, we want to interconnect the 3 hosts. In order for one host to find the other, the `frr` Router package is needed. Also, once the cluster is up and running, we want to be able to test the performance of each link. For that purpose, we need `iperf3`.
