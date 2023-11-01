@@ -266,6 +266,8 @@ frr defaults traditional
 hostname pveX
 log syslog informational
 service integrated-vtysh-config
+ip forwarding
+ipv6 forwarding
 !
 interface en05
  ip router openfabric 1
