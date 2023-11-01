@@ -28,7 +28,7 @@ So, these servers are configured as:
 2. hostname: `pve2`, ip address: `192.168.178.12/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 3. hostname: `pve3`, ip address: `192.168.178.13/24`, gateway: `192.168.178.1`, DNS: `192.168.178.1`, Disk Size: 200 GB
 
-The installation of Proxmox VE version 8 is doen following these steps:
+Install Proxmox VE version 8 following these steps:
 1. Insert the Ventoy USB drive into one of the USB3.2 ports on the host
 2. Boot the host and press F7 until the boot menu appears
 3. Select your Ventoy USB drive as boot device
