@@ -82,8 +82,8 @@ On the GUI select the host: Datacenter -> pveX and click the `>_Shell` button on
 
 Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
 
-Press `^\` to find: `Ext.Msg.show` to replace by: `void({ //` and `Y`. Do this only for the first match. So now enter `^C` to cancel remaining replace operations.
-Leave the editor by `^X` and `Y` to save the file and `Enter`.
+Press `^\` to find: `Ext.Msg.show` and replace by: `void({ //` and `Y`. Do this only for the first match. So now enter `^C` to cancel remaining replace operations.
+Leave the editor by `^X` and `Y` to save the file and press `Enter` to leave.
 ### Reboot
 Now it is the right time to reboot the host, so we can enjoy the latest kernel. On Datacenter -> pveX, click the `Reboot` button.
 ## Add FRR Router and Iperf3 Test packages
