@@ -47,9 +47,9 @@ Install Proxmox VE version 8 following these steps:
 
 ## Additional steps after Proxmox installation
 Note: The Proxmox GUI can be accessed via the management interface using a browser. The URL is for:
-1. `pve1`: [192.168.178.11:8006](192.168.178.11:8006)
-2. `pve1`: [192.168.178.12:8006](192.168.178.12:8006)
-3. `pve1`: [192.168.178.13:8006](192.168.178.13:8006)
+1. `pve1`: [192.168.178.11:8006](http://192.168.178.11:8006)
+2. `pve1`: [192.168.178.12:8006](http://192.168.178.12:8006)
+3. `pve1`: [192.168.178.13:8006](http://192.168.178.13:8006)
 
 After the basic Proxmox installation, we need to adapt the repositories. Using the Proxmox GUI (user root), click Datacenter -> pveX -> Updates -> Repositories.
 1. Disable component `enterprise`
