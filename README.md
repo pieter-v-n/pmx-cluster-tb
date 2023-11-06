@@ -323,4 +323,4 @@ So follow these steps in sequence:
 8. Use the Proxmox GUI to login as root to `pve3`.
 9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `10.0.0.83/32` for Cluster Network Link 0. Click Join `pvc1`.
 10. Close the browsers that are connected to `pve2` and `pve3`.
-11. On `pve1` go to Datacenter. You should see the name of the Datacenter: `pvc1` with 3 hosts: `pve1`, `pve2` and `pve3`. Now the cocsync network is operational, you can manage all pve's of the cluster from any of the pve's.
+11. On `pve1` go to Datacenter. You should see the name of the Datacenter: `pvc1` with 3 hosts: `pve1`, `pve2` and `pve3`. Now the corosync network is operational, you can manage all pve's of the cluster from any of the pve's.
