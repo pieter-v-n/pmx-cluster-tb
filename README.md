@@ -94,6 +94,8 @@ Normally, Proxmox VE only creates the user "root" with super user permissions. H
 - as root, run: `adduser <username>`
 -   provide password and other facts (optional)
 - as root, run: `usermod -aG sudo <username>`
+
+Note: After you have added a user, you can add this user to the Proxmox PAM user list.
 ## Add Graphical User Interface to each server (optional)
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
