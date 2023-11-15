@@ -124,10 +124,10 @@ thunderbolt-net
 ## Edit Interfaces file
 When the Thunderbolt interface show up, they will be named `thunderbolt0` and `thunderbolt1` per default. We want to rename these interfaces, so they follow the standard ethernet interface naming rules, so they will show up in the Proxmox network interfaces list.
 The file `/etc/network/interfaces` must be changed by:
-1. Delete the thunderboltX entries
+1. Delete the thunderboltX entries (if they are present)
 2. Add the en05 and en06 entries for both IPv4 and IPv6 (take note of the increased MTU size)
 
-So that the file will look like: (replace X with 1, 2, 3 for pve1, pve2 and pve3)
+So that the file will look like: (replace X with 1, 2, 3 for pve1, pve2 and pve3 respectively)
 ```
 auto lo
 iface lo inet loopback
