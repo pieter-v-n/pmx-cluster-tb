@@ -49,8 +49,8 @@ Install Proxmox VE version 8 following these steps:
 ### Login
 The Proxmox GUI can be accessed via the management interface using a browser. The URL is for:
 1. `pve1`: [192.168.178.11:8006](http://192.168.178.11:8006)
-2. `pve1`: [192.168.178.12:8006](http://192.168.178.12:8006)
-3. `pve1`: [192.168.178.13:8006](http://192.168.178.13:8006)
+2. `pve2`: [192.168.178.12:8006](http://192.168.178.12:8006)
+3. `pve3`: [192.168.178.13:8006](http://192.168.178.13:8006)
 
 You will be presented with a login widget:
 ![GUI Login](images/GUI-login.png).
