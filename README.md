@@ -100,6 +100,17 @@ Note: After you have added a user, you can add this user to the Proxmox PAM user
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
+## Add Graphic Drivers incl. Vulkan (optional)
+In case we want to use this host also for some playing of games (e.g. X-Plane 12), we need to install additional drivers for the iGPU.
+- Download the `amdgpu-install` tool from AMD's support site: go to [https://www.amd.com/en/support/linux-drivers](AMD drivers for Linux) and open the `Ubuntu x86 64-Bit` accordion. In `adeon™ Software for Linux® version 23.30 for Ubuntu 22.04.3` click `Download` to download the latest .deb file into your Downloads folder.
+- Open a terminal and run: `sudo apt install ~/Downloads/amdgpu-install*all.deb`
+- Now run the installer: `sudo amdgpu-install --vulkan=amdvlk --opencl=rocr --usecase=graphics`
+- Add the user to the render and video groups: `sudo usermod -aG render $USER && sudo usermod -aG video $USER`
+- Install vulkan drivers and tools: `sudo apt install mesa-vulkan-drivers vulkan-tools`
+- `sudo apt install grub-efi-amd64`
+- Before you can use Vulkan, you need to set the following environment variable: `export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d./radeon_icd.x86_64.json`, suggest to include this line in your .profile file.
+- To check if Vulkan was corectly installed, run: `vulkaninfo --summary`
+
 ### Reboot
 Now it is the right time to reboot the host, so we can enjoy the latest kernel. On Datacenter -> pveX, click the `Reboot` button.
 
@@ -135,12 +146,15 @@ iface lo inet loopback
 auto lo:0
 iface lo:0 inet static
         address 10.0.0.8X/32
+#Thunderbolt IPv4
         
 auto lo:6
 iface lo:6 inet static
         address fc00::8X/128
+#Thunderbolt IPv6
 
 iface enp3s0 inet manual
+#local
 
 auto vmbr0
 iface vmbr0 inet static
@@ -149,8 +163,10 @@ iface vmbr0 inet static
 	bridge-ports enp3s0
 	bridge-stp off
 	bridge-fd 0
+#local
 
 iface enp4s0 inet manual
+#guest
 
 auto en05
 iface en05 inet static
