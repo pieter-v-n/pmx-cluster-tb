@@ -102,7 +102,7 @@ Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely
 - as root (or use sudo), run: `systemctl start lightdm`
 ## Add Graphic Drivers incl. Vulkan (optional)
 In case we want to use this host also for some playing of games (e.g. X-Plane 12), we need to install additional drivers for the iGPU.
-- Download the `amdgpu-install` tool from AMD's support site: go to [https://www.amd.com/en/support/linux-drivers](AMD drivers for Linux) and open the `Ubuntu x86 64-Bit` accordion. In `adeon™ Software for Linux® version 23.30 for Ubuntu 22.04.3` click `Download` to download the latest .deb file into your Downloads folder.
+- Download the `amdgpu-install` tool from AMD's support site: go to [AMD drivers for Linux](https://www.amd.com/en/support/linux-drivers) and open the `Ubuntu x86 64-Bit` accordion. In `adeon™ Software for Linux® version 23.30 for Ubuntu 22.04.3` click `Download` to download the latest .deb file into your Downloads folder.
 - Open a terminal and run: `sudo apt install ~/Downloads/amdgpu-install*all.deb`
 - Now run the installer: `sudo amdgpu-install --vulkan=amdvlk --opencl=rocr --usecase=graphics`
 - Add the user to the render and video groups: `sudo usermod -aG render $USER && sudo usermod -aG video $USER`
