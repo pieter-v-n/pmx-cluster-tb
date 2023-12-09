@@ -351,11 +351,11 @@ Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or
 # Create CEPH OSD (this section is Draft)
 Now CEPH is installed, we can add the actual storage. When we installed Proxmox on each host, we did not use all the space available on the SSD, but only reserved 200 GB for Proxmox. The remaining 1800 GB (aprox.), is still unallocated on the SSD. Although Proxmox does not recommend to use an OSDN on the same disk device as the host OS, we are going to do this. So, the first 200 GB of the SSD is provided for 3 partitions used by Proxmox; the remaining is used for partition 4 and provided to Ceph.
 - Check the above is true. Open a terminal window for the host via the GUI: `Datacenter`-> `pveX` (X is 1, 2 or 3) and click `Shell`. Type: `lsblk`. You should see (for a 2TB SSD installed in slot0):
-- nvme0n1 1.8T disk total: 3907029168
-- nvme0n1p1 1007k part 34 - 2047 (2014)
-- nvme0n1p2 1G part /boot/... 2048 - 2099199 (2097152)
-- nvme0n1p3 199G part 2099200 - 419430400 (417331201)
-- followed by LVM information for the local storage already used.
+	nvme0n1 1.8T disk total: 3907029168
+	nvme0n1p1 1007k part 34 - 2047 (2014)
+	nvme0n1p2 1G part /boot/... 2048 - 2099199 (2097152)
+	nvme0n1p3 199G part 2099200 - 419430400 (417331201)
+	followed by LVM information for the local storage already used.
 Now create partition 4 on this disk:
 - In the same terminal window, type: `fdisk /dev/nvme0n1`. Type `F` to see how many sectors are still free on your SSD. Here it shows: 419432448 - 3907029134 (3487596687) 1.6TB. Type `n` to create a new partition. Accept the default values: 4 (partition number), 419432448 (first sector), 3907028997 (last sector). Then type `w` to write back the partition table.
 - In the same terminal window, type: `lsblk` to see that now you have an addition partition 4 (nvme0n1p4) with size 1.6TB.
