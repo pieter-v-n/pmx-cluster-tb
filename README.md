@@ -342,3 +342,24 @@ So follow these steps in sequence:
 9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `10.0.0.83/32` for Cluster Network Link 0. Click Join `pvc1`.
 10. Close the browsers that are connected to `pve2` and `pve3`.
 11. On `pve1` go to Datacenter. You should see the name of the Datacenter: `pvc1` with 3 hosts: `pve1`, `pve2` and `pve3`. Now the corosync network is operational, you can manage all pve's of the cluster from any of the pve's.
+
+# Enable CEPH (this section is Draft)
+Now we have a Cluster with 3 hosts, we can enable CEPH to manage the shared storage.
+## Install CEPH (repeat this section for each Host in the Cluster)
+Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` and then click `Install Ceph`. Change the Repository from `Enterprise (Recommended)` into: `No Subscription` and select `reef (18.2)`. Then click `Start reef installation`. A CLI window is created. Follow the instructions provided. This will install Ceph. Click `Next`. On the Configuration page, provide the Public IP Network CIDR: `fc00::8X/128` (X is 1, 2 or 3). Provide the Cluster IP Network CIDR: `fc00::8X/128` (X is 1, 2 or 3). Click `Next` and `Finish`.
+
+# Create CEPH OSD (this section is Draft)
+Now CEPH is installed, we can add the actual storage. When we installed Proxmox on each host, we did not use all the space available on the SSD, but only reserved 200 GB for Proxmox. The remaining 1800 GB (aprox.), is still unallocated on the SSD. Although Proxmox does not recommend to use an OSDN on the same disk device as the host OS, we are going to do this. So, the first 200 GB of the SSD is provided for 3 partitions used by Proxmox; the remaining is used for partition 4 and provided to Ceph.
+- Check the above is true. Open a terminal window for the host via the GUI: `Datacenter`-> `pveX` (X is 1, 2 or 3) and click `Shell`. Type: `lsblk`. You should see (for a 2TB SSD installed in slot0):
+- nvme0n1 1.8T disk total: 3907029168
+- nvme0n1p1 1007k part 34 - 2047 (2014)
+- nvme0n1p2 1G part /boot/... 2048 - 2099199 (2097152)
+- nvme0n1p3 199G part 2099200 - 419430400 (417331201)
+- followed by LVM information for the local storage already used.
+Now create partition 4 on this disk:
+- In the same terminal window, type: `fdisk /dev/nvme0n1`. Type `F` to see how many sectors are still free on your SSD. Here it shows: 419432448 - 3907029134 (3487596687) 1.6TB. Type `n` to create a new partition. Accept the default values: 4 (partition number), 419432448 (first sector), 3907028997 (last sector). Then type `w` to write back the partition table.
+- In the same terminal window, type: `lsblk` to see that now you have an addition partition 4 (nvme0n1p4) with size 1.6TB.
+- In the same terminal window, type: `mkfs -t xfs /dev/nvme0n1p4` to create an XFS file system on this partition. (Note: Ceph will erase this in a next step anyhow).
+- Now we will wipe this partition. Use the Proxmox GUI: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> Disks and locate your Device in the list as `/dev/nvme0n1p4` (you may need to change the width of the column to see all). When you click on this item, a button appears `wipe disk`. After you have made sure you selected the correct partition, click this button and wait for the process to finish.
+- Now you have an empty partition, you can tell Ceph to use it as an OSD. Use the Proxmox GUI: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> Ceph -> OSD. Click the button `Create OSD`. Select the empty partition `/dev/nvme0n1p4` as your disk, select `Use OSD Disk` as DB Disk and click `Create`.
+- 
