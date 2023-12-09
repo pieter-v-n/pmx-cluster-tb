@@ -332,21 +332,21 @@ Now all 3 hosts are up and running and the inter-connectivity between each host 
 
 So follow these steps in sequence:
 1. Use the Proxmox GUI to login as root to `pve1`.
-2. Go to Datacenter -> Cluster -> Create Cluster. Cluster Name: `pvc1`, Cluster Network Link 0: `10.0.0.81`. Click Create and wait until the cluster creation task has completed.
+2. Go to Datacenter -> Cluster -> Create Cluster. Cluster Name: `pvc1`, Cluster Network Link 0: `fc00::81`. Click Create and wait until the cluster creation task has completed.
 3. Go to Datacenter -> Cluster -> Join Information and click `Copy Information`.
 4. Use the Proxmox GUI to login as root to `pve2`.
-5. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `10.0.0.82/32` for Cluster Network Link 0. Click Join `pvc1`.
+5. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::82/128` for Cluster Network Link 0. Click Join `pvc1`.
 6. Use the Proxmox GUI to login as root to `pve1`.
 7. Go to Datacenter -> Cluster -> Join Information and click `Copy Information`.
 8. Use the Proxmox GUI to login as root to `pve3`.
-9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `10.0.0.83/32` for Cluster Network Link 0. Click Join `pvc1`.
+9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::83/128` for Cluster Network Link 0. Click Join `pvc1`.
 10. Close the browsers that are connected to `pve2` and `pve3`.
 11. On `pve1` go to Datacenter. You should see the name of the Datacenter: `pvc1` with 3 hosts: `pve1`, `pve2` and `pve3`. Now the corosync network is operational, you can manage all pve's of the cluster from any of the pve's.
 
 # Enable CEPH (this section is Draft)
 Now we have a Cluster with 3 hosts, we can enable CEPH to manage the shared storage.
 ## Install CEPH (repeat this section for each Host in the Cluster)
-Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` and then click `Install Ceph`. Change the Repository from `Enterprise (Recommended)` into: `No Subscription` and select `reef (18.2)`. Then click `Start reef installation`. A CLI window is created. Follow the instructions provided. This will install Ceph. Click `Next`. On the Configuration page, provide the Public IP Network CIDR: `fc00::8X/128` (X is 1, 2 or 3). Provide the Cluster IP Network CIDR: `fc00::8X/128` (X is 1, 2 or 3). Click `Next` and `Finish`.
+Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` and then click `Install Ceph`. Change the Repository from `Enterprise (Recommended)` into: `No Subscription` and select `reef (18.2)`. Then click `Start reef installation`. A CLI window is created. Follow the instructions provided. This will install Ceph. Click `Next`. On the Configuration page, provide the Public IP Network CIDR: `192.168.178.1X/24` (X is 1, 2 or 3). Provide the Cluster IP Network CIDR: `fc00::8X/128` (X is 1, 2 or 3). Click `Next` and `Finish`.
 
 # Create CEPH OSD (this section is Draft)
 Now CEPH is installed, we can add the actual storage. When we installed Proxmox on each host, we did not use all the space available on the SSD, but only reserved 200 GB for Proxmox. The remaining 1800 GB (aprox.), is still unallocated on the SSD. Although Proxmox does not recommend to use an OSDN on the same disk device as the host OS, we are going to do this. So, the first 200 GB of the SSD is provided for 3 partitions used by Proxmox; the remaining is used for partition 4 and provided to Ceph.
