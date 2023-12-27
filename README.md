@@ -67,7 +67,7 @@ After the basic Proxmox installation, we need to adapt the repositories. Using t
 1. Select and `Disable` component `enterprise`
 2. Select and `Disable` component `pve-enterprise`
 3. Add `pve-no-subscription` by clicking `Add` and selecting `No Subscription`
-4. Add `no-subscription` (ceph) by clicking `Add` and selecting `Ceph Quincy No-Subscription`
+4. Add `no-subscription` (ceph) by clicking `Add` and selecting `Ceph Reef No-Subscription`
 
 The result will look like: ![Repository overview](images/Repositories.png)
 ### Check for updates and Upgrade
