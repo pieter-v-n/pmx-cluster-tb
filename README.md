@@ -145,8 +145,8 @@ So that the file will look like: (replace X with 1, 2, 3 for pve1, pve2 and pve3
 auto lo
 iface lo inet loopback
 
-auto lo:0
-iface lo:0 inet static
+auto lo:4
+iface lo:4 inet static
         address 10.0.0.8X/32
 #Thunderbolt IPv4
         
@@ -158,6 +158,9 @@ iface lo:6 inet static
 iface enp3s0 inet manual
 #local
 
+iface enp4s0 inet manual
+#guest
+
 auto vmbr0
 iface vmbr0 inet static
 	address 192.168.178.1X/24
@@ -166,9 +169,6 @@ iface vmbr0 inet static
 	bridge-stp off
 	bridge-fd 0
 #local
-
-iface enp4s0 inet manual
-#guest
 
 auto en05
 iface en05 inet static
