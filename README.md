@@ -91,6 +91,7 @@ Later, we want to interconnect the 3 hosts. In order for one host to find the ot
 
 ## Add secundary user (optional)
 Normally, Proxmox VE only creates the user "root" with super user permissions. Here we add a secundary user with standard permission but with "sudo" capability to execute admin tasks hat require super user permissions.
+- as root, run: `apt install sudo`
 - as root, run: `adduser <username>`
 -   provide password and other facts (optional)
 - as root, run: `usermod -aG sudo <username>`
