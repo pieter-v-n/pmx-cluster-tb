@@ -20,7 +20,7 @@ Each of these operate as an Proxmox VE. Each server has 2x USB4 ports. These por
 This project describes the changes that need to be made to the individual server configurations to enable an IP synchronization network.
 # Bare Metal Proxmox Installation (repeat for all 3 hosts)
 ## Basic Proxmox Installation
-Download the ISO for the Proxmox VE version 8.1 installation image (proxmox-ve_8.1-1.iso) onto a USB flash medium, such as the [Ventoy](https://www.ventoy.net/en/index.html) tool. Use version 1.0.96 in order to boot successfully.
+Download the ISO for the Proxmox VE version 8.1 installation image (proxmox-ve_8.1-1.iso) onto a USB flash medium, such as the [Ventoy](https://www.ventoy.net/en/index.html) tool. Use version 1.0.96 in order to boot successfully. Or use [Balena Etcher](https://etcher.balena.io).
 In the future, we want to use most of the storage space on the 2 TB Samsung SSD for cluster storage (Ceph). So when installing Proxmox on the server, select the (first) Samsung SSD but reduce the used space for Proxmox to 200 GB.
 Then follow the PVE installation using default values. In my setup, I have connected one of the 2.5 Gbps ports to my home router (for internet access). The router normally manages the IP addressing by DHCP, but I have configured the router to keep the addresses between 192.168.178.1 and 192.168.178.20 outside the range used by DHCP, so I can assign a unique IP address from this range to each of the servers.
 So in this particular network setup, these servers are configured as:
