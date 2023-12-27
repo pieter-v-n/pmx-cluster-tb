@@ -334,14 +334,14 @@ Now all 3 hosts are up and running and the inter-connectivity between each host 
 
 So follow these steps in sequence:
 1. Use the Proxmox GUI to login as root to `pve1`.
-2. Go to Datacenter -> Cluster -> Create Cluster. Cluster Name: `pvc1`, Cluster Network Link 0: `fc00::81`. Click Create and wait until the cluster creation task has completed.
+2. Go to Datacenter -> Cluster -> Create Cluster. Cluster Name: `pvc1`, Cluster Network Link 0: `fc00::81`, Cluster Network Link 1: `192.168.178.11`. Click Create and wait until the cluster creation task has completed.
 3. Go to Datacenter -> Cluster -> Join Information and click `Copy Information`.
 4. Use the Proxmox GUI to login as root to `pve2`.
-5. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::82/128` for Cluster Network Link 0. Click Join `pvc1`.
+5. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::82/128` for Cluster Network Link 0, and `192.168.178.12/24` for Cluster Network Link 1. Click Join `pvc1`.
 6. Use the Proxmox GUI to login as root to `pve1`.
 7. Go to Datacenter -> Cluster -> Join Information and click `Copy Information`.
 8. Use the Proxmox GUI to login as root to `pve3`.
-9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::83/128` for Cluster Network Link 0. Click Join `pvc1`.
+9. Go to Datacenter -> Cluster -> Join Cluster. Paste the buffer into the text window. Enter the root password of pve1. Select `fc00::83/128` for Cluster Network Link 0, and `192.168.178.13/24` for Cluster Network Link 1. Click Join `pvc1`.
 10. Close the browsers that are connected to `pve2` and `pve3`.
 11. On `pve1` go to Datacenter. You should see the name of the Datacenter: `pvc1` with 3 hosts: `pve1`, `pve2` and `pve3`. Now the corosync network is operational, you can manage all pve's of the cluster from any of the pve's.
 
