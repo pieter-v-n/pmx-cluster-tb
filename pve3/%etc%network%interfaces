@@ -1,9 +1,5 @@
 auto lo
 iface lo inet loopback
-
-auto lo:0
-iface lo:0 inet static
-        address 10.0.0.83/32
         
 auto lo:6
 iface lo:6 inet static
