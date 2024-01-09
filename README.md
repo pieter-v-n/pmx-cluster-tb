@@ -144,11 +144,6 @@ So that the file will look like: (replace X with 1, 2, 3 for pve1, pve2 and pve3
 ```
 auto lo
 iface lo inet loopback
-
-auto lo:4
-iface lo:4 inet static
-        address 10.0.0.8X/32
-#Thunderbolt IPv4
         
 auto lo:6
 iface lo:6 inet static
@@ -290,17 +285,14 @@ ip forwarding
 ipv6 forwarding
 !
 interface en05
- ip router openfabric 1
  ipv6 router openfabric 1
 exit
 !
 interface en06
- ip router openfabric 1
  ipv6 router openfabric 1
 exit
 !
 interface lo
- ip router openfabric 1
  ipv6 router openfabric 1
  openfabric passive
 exit
@@ -321,9 +313,9 @@ After all these changes to the host configuration files, it is time to reboot th
 ## Check connectivity
 After all hosts are booted, and interconnected by the 3 Thunderbolt cables, we can check whether each host can see eachother.
 1. as root (or by sudo) type: `vtysh -c "show openfabric topology"`
-2. we should see that each host can see the two other hosts, both with IPv4 (using IPv4 addresses: `10.0.0.81/32`, `10.0.0.82/32`, and `10.0.0.83/32`), and IPv6 (using IPv6 addresses: `fc00::81/128`, `fc00::82/128` and `fc00::83/128`) .
+2. we should see that each host can see the two other hosts, using IPv6 addresses: `fc00::81/128`, `fc00::82/128` and `fc00::83/128`.
 3. as root (or by sudo) run the iperf3 server on each host by: `iperf3 -s`
-4. now we can test the connectivity and bandwidth between each pair of hosts, for example from pve1 to pve2: on pve1, run `iperf -c 10.0.0.82` and check that the bandwith is at least 10 Gbps.
+4. now we can test the connectivity and bandwidth between each pair of hosts, for example from pve1 to pve2: on pve1, run `iperf3 -c fc00::82` and check that the bandwith is at least 10 Gbps.
 ## From here onwards, execute the procedure only once.
 
 # Create Cluster
