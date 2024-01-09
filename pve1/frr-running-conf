@@ -7,17 +7,14 @@ ip forwarding
 ipv6 forwarding
 !
 interface en05
- ip router openfabric 1
  ipv6 router openfabric 1
 exit
 !
 interface en06
- ip router openfabric 1
  ipv6 router openfabric 1
 exit
 !
 interface lo
- ip router openfabric 1
  ipv6 router openfabric 1
  openfabric passive
 exit
