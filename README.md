@@ -390,6 +390,8 @@ Per default, only one CEPH Monitor is created. It is recommended to have a Monit
 So we will create 2 additional monitors. Click `Datacenter` -> `pve1` -> `Ceph` -> `Monitor`.
 Under section Manager, click `Create`. Select for Host: `pve2` and `pve3`.
 
+# Create CEPH Pool
+Go to `Datacenter` -> `pve1` -> `Ceph` -> `Pools`. Click `Create` and fill in: name: `nvme` and click `Create`.
 # Cluster Tuning
 Some settings can be changed to improve the cluster behavior.
 ## Migration Settings
