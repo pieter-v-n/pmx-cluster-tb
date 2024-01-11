@@ -396,3 +396,4 @@ Some settings can be changed to improve the cluster behavior.
 Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::81/128`.
 ## HA Settings
 Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
+In order to make HA work, create HA Groups. Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `cluster` and tick all nodes.
