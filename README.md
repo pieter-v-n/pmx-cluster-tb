@@ -339,6 +339,35 @@ So follow these steps in sequence:
 Now we have a Cluster with 3 hosts, we can enable CEPH to manage the shared storage.
 ## Install CEPH (repeat this section for each Host in the Cluster)
 Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` and then click `Install Ceph`. Change the Repository from `Enterprise (Recommended)` into: `No Subscription` and select `reef (18.2)`. Then click `Start reef installation`. A CLI window is created. Follow the instructions provided. This will install Ceph. Click `Next`. On the Configuration page, provide the Public IP Network CIDR: `fc00::/64`. Provide the Cluster IP Network CIDR: `fc00::/64`. Click `Next` and `Finish`.
+## Check CEPH configuration in Cluster
+Now it is important to check the common CEPH configuration file at `/etc/pve/ceph.conf`. To make changes, you can edit this file from any host, because the directory `/etc/pve` is sync'd between all hosts in the cluster.
+```
+[global]
+         auth_client_required = cephx
+         auth_cluster_required = cephx
+         auth_service_required = cephx
+         cluster_network = fc00::/64
+         fsid = 9b4445f6-c3ed-43e6-a138-59f6919a900e
+         mon_allow_pool_delete = true
+         mon_host = fc00::81 fc00::82 fc00::83
+         ms_bind_ipv4 = false
+         ms_bind_ipv6 = true
+         osd_pool_default_min_size = 2
+         osd_pool_default_size = 3
+         public_network = fc00::/64
+
+[client]
+         keyring = /etc/pve/priv/$cluster.$name.keyring
+
+[mon.pve1]
+         public_addr = fc00::81
+
+[mon.pve2]
+         public_addr = fc00::82
+
+[mon.pve3]
+         public_addr = fc00::83
+```
 
 # Create CEPH OSD (this section is Draft)
 Now CEPH is installed, we can add the actual storage. When we installed Proxmox on each host, we did not use all the space available on the SSD, but only reserved 200 GB for Proxmox. The remaining 1800 GB (aprox.), is still unallocated on the SSD. Although Proxmox does not recommend to use an OSDN on the same disk device as the host OS, we are going to do this. So, the first 200 GB of the SSD is provided for 3 partitions used by Proxmox; the remaining is used for partition 4 and provided to Ceph.
