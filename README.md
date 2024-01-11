@@ -340,7 +340,7 @@ Now we have a Cluster with 3 hosts, we can enable CEPH to manage the shared stor
 ## Install CEPH (repeat this section for each Host in the Cluster)
 Using the Proxmox GUI from any host, go to: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` and then click `Install Ceph`. Change the Repository from `Enterprise (Recommended)` into: `No Subscription` and select `reef (18.2)`. Then click `Start reef installation`. A CLI window is created. Follow the instructions provided. This will install Ceph. Click `Next`. On the Configuration page, provide the Public IP Network CIDR: `fc00::/64`. Provide the Cluster IP Network CIDR: `fc00::/64`. Click `Next` and `Finish`.
 ## Check CEPH configuration in Cluster
-Now it is important to check the common CEPH configuration file at `/etc/pve/ceph.conf`. To make changes, you can edit this file from any host, because the directory `/etc/pve` is sync'd between all hosts in the cluster.
+Now it is important to check the common CEPH configuration file at `/etc/pve/ceph.conf`, especially for the Public and Cluster Networks. To make changes, you can edit this file from any host, because the directory `/etc/pve` is sync'd between all hosts in the cluster.
 ```
 [global]
          auth_client_required = cephx
