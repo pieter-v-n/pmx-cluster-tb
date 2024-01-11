@@ -385,8 +385,14 @@ Now create partition 4 on this disk:
 - Now we will wipe this partition. Use the Proxmox GUI: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Disks` and locate your Device in the list as `/dev/nvme0n1p4` (you may need to change the width of the column to see all). When you click on this item, a button appears `wipe disk`. After you have made sure you selected the correct partition, click this button and wait for the process to finish.
 - Now you have an empty partition, you can tell Ceph to use it as an OSD. Use the Proxmox GUI: `Datacenter` -> `pveX` (X is 1, 2 or 3) -> `Ceph` -> `OSD`. Click the button `Create OSD`. Select the empty partition `/dev/nvme0n1p4` as your disk, select `Use OSD Disk` as DB Disk. Click the `Advanced` check box and select `nvme` as device class. Then click `Create`.
 
-#Create additional CEPH Monitors
+# Create additional CEPH Monitors
 Per default, only one CEPH Monitor is created. It is recommended to have a Monitor on each host that runs one or more CEPH OSD's.
 So we will create 2 additional monitors. Click `Datacenter` -> `pve1` -> `Ceph` -> `Monitor`.
 Under section Manager, click `Create`. Select for Host: `pve2` and `pve3`.
 
+# Cluster Tuning
+Some settings can be changed to improve the cluster behavior.
+## Migration Settings
+Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::81/128`.
+## HA Settings
+Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
