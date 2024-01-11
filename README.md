@@ -77,7 +77,7 @@ Using the Proxmox GUI (user root), click: Datacenter -> pveX -> Updates and then
 
 Check at Datacenter -> pveX -> Summary that the kernel version is `Linux 6.2.16-14-pve` or later.
 
-To avoid the Subscription message ro pop-up every time you make a change to the host, we need to edit a file.
+To avoid the Subscription message to pop-up every time you make a change to the host, we need to edit a file.
 On the GUI select the host: Datacenter -> pveX and click the `>_Shell` button on the top of the screen. A new shell opens for the user with root permissions.
 
 Type: `nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js`
