@@ -101,7 +101,7 @@ Note: After you have added a user, you can add this user to the Proxmox PAM user
 Normally, Proxmox VE is installed as a headless server, i.e. is managed remotely using a web browser (port 8006). Just for convenience, we will enable the Linux GUI and install Chromium so we can manage each server locally.
 - as root (or use sudo), run: `apt install mate chromium lightdm`
 - as root (or use sudo), run: `systemctl start lightdm`
-## Add Graphics Drivers incl. Vulkan (optional)
+## Add Graphics Drivers incl. Vulkan (optional - only works with Proxmox 8.0, not with 8.1)
 ### Note: the build fails with error logged in: `/var/lib/dkms/amdgpu/6.2.4-1683306.22.04/build/make.log`
 In case we want to use this host also for some playing of games (e.g. X-Plane 12), we need to install additional drivers for the iGPU.
 - Download the `amdgpu-install` tool from AMD's support site: go to [AMD drivers for Linux](https://www.amd.com/en/support/linux-drivers) and open the `Ubuntu x86 64-Bit` accordion. In `adeon™ Software for Linux® version 23.30 for Ubuntu 22.04.3` click `Download` to download the latest .deb file into your Downloads folder.
