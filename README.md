@@ -166,16 +166,10 @@ iface vmbr0 inet static
 #local
 
 auto en05
-iface en05 inet static
-        mtu 4000
-
 iface en05 inet6 static
         mtu 4000
 
 auto en06
-iface en06 inet static
-        mtu 4000
-
 iface en06 inet6 static
         mtu 4000
 ```
