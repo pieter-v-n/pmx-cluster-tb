@@ -395,5 +395,9 @@ Some settings can be changed to improve the cluster behavior.
 ## Migration Settings
 Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::81/128`.
 ## HA Settings
-Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
-In order to make HA work, create HA Groups. Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `cluster` and tick all nodes.
+- Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
+In order to make HA work, create HA Groups. 
+- Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `cluster` and tick all nodes.	Set priority all equal to 10.
+- Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `prio-pve1` and tick all nodes. Set priority to 30 for pve1, 20 for pve2 and 10 for pve3.
+- Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `prio-pve2` and tick all nodes. Set priority to 10 for pve1, 30 for pve2 and 20 for pve3.
+- Click `Datacenter` -> `HA` -> `Groups` and `Create`. Use for example: ID: `prio-pve1` and tick all nodes. Set priority to 20 for pve1, 10 for pve2 and 30 for pve3.
