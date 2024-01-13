@@ -395,7 +395,14 @@ Go to `Datacenter` -> `pve1` -> `Ceph` -> `Pools`. Click `Create` and fill in: n
 # Cluster Tuning
 Some settings can be changed to improve the cluster behavior.
 ## Migration Settings
-Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::/64`.
+Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::81/128`.
+After saving this setting, go to: `Datacenter` -> `pveX` and click `Shell`. Edit the cluster configuration file as follows:
+```
+ha: shutdown_policy=migrate
+keyboard: en-us
+migration: secure,network=fc00::/64
+```
+and save and exit.
 ## HA Settings
 - Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
 In order to make HA work, create HA Groups. 
