@@ -5,7 +5,7 @@ This work is mainly based on prior work of [scyto](https://gist.github.com/scyto
 # Problem Statement
 A Proxmox cluster consists of two or more hosts, each running the Proxmox Virtual Environment (VE). Virtual Machines (VM's) and Linux Containers (LXC's) are hosted by the VE.
 To enable High Availability (HA) of the VE's, you can build a Cluster of VE's, so that one VE can take over the VM's and LXC's from another VE in case of issues. These issues impacting the host may include software or hardware upgrades, hardware or software failures, etc. that prevents a host from working normally.
-Proxmox has the feature to build the cluster with a (dedicated) network to carry the traffic caused by the transfer of a VM from one host to another. This transfer should happen quickly, while significant amount of data must be moved. Therefor a fast, reliable and preferably dedicated synchoronization network is prefererred.
+Proxmox has the feature to build the cluster with a (dedicated) network to carry the traffic caused by the transfer of a VM from one host to another. This transfer should happen quickly, while significant amount of data must be moved. Therefor a fast, reliable and preferably dedicated synchronization network is prefered.
 Here we propose a cluster with a dedicated synchronization network based on USB4/Thunderbolt. USB4/Thunderbolt namely supports IP (by the thunderbolt-net Linux module), so Point-to-Point IP connections can be made.
 The prior work by scyto demonstrates that this works on Intel based mini personal computers (Intel NUC13). Knowing that Thunderbolt support on Intel platforms is very good, the project described here takes on the challenge to test this on AMD based mini personal computers ([Bee-link GTR7](https://www.bee-link.com/catalog/product/index?id=485)).
 # Architecture
@@ -166,11 +166,11 @@ iface vmbr0 inet static
 #local
 
 auto en05
-iface en05 inet6 static
+iface en05 inet6 manual
         mtu 4000
 
 auto en06
-iface en06 inet6 static
+iface en06 inet6 manual
         mtu 4000
 ```
 ## Detect Thunderbolt Interface device identifiers
@@ -395,7 +395,7 @@ Go to `Datacenter` -> `pve1` -> `Ceph` -> `Pools`. Click `Create` and fill in: n
 # Cluster Tuning
 Some settings can be changed to improve the cluster behavior.
 ## Migration Settings
-Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::81/128`.
+Click `Datacenter` -> `Options` -> Migration Settings` and `Edit`. Select the Thunderbolt IPv6 network: `fc00::/64`.
 ## HA Settings
 - Click `Datacenter` -> `Options` -> `HA Settings` and `Edit`. Select the `migrate` option for Shutdown Policy.
 In order to make HA work, create HA Groups. 
