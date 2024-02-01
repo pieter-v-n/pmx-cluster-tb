@@ -172,6 +172,9 @@ iface en05 inet6 manual
 auto en06
 iface en06 inet6 manual
         mtu 4000
+
+# This must be the last line in the file
+post-up /usr/bin/systemctl restart frr.service
 ```
 ## Detect Thunderbolt Interface device identifiers
 We need to uniquely identify each Thunderbolt network device, in order to manage it. See: ![GTR7 Backside](/images/Server-back.png)
